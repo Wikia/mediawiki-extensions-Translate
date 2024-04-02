@@ -44,7 +44,6 @@ use User;
 use Wikimedia\ScopedCallback;
 use WikiPage;
 use WikiPageMessageGroup;
-use WikitextContent;
 
 /**
  * Hooks for page translation.
@@ -815,7 +814,7 @@ class Hooks {
 
 	private static function tpSyntaxError( ?PageIdentity $page, ?Content $content ): ?Status {
 		// T163254: Ignore translation markup on non-wikitext pages
-		if ( !$content instanceof WikitextContent || !$page ) {
+		if ( !$content instanceof TextContent || !$page ) {
 			return null;
 		}
 
@@ -890,13 +889,25 @@ class Hooks {
 	) {
 		$content = $wikiPage->getContent();
 
-		// T163254: Disable page translation on non-wikitext pages
-		if ( $content instanceof WikitextContent ) {
-			$text = $content->getText();
-		} else {
-			// Not applicable
-			return true;
+		$config = MediaWikiServices::getInstance()->getMainConfig();
+		// Only allow translating configured content models (T360544)
+		if ( !in_array( $content->getModel(), $config->get( 'PageTranslationAllowedContentModels' ) ) ) {
+			return;
 		}
+
+		if ( !( $content instanceof TextContent ) ) {
+			LoggerFactory::getInstance( 'Translate' )->error(
+				'Expected {title} to have content of type TextContent, got {contentType}. ' .
+				'$wgPageTranslationAllowedContentModels is incorrectly configured with non text content model.',
+				[
+					'title' => $wikiPage->getTitle()->getPrefixedDBkey(),
+					'contentType' => get_class( $content )
+				]
+			);
+			return;
+		}
+
+		$text = $content->getText();
 
 		$parser = Services::getInstance()->getTranslatablePageParser();
 		if ( $parser->containsMarkup( $text ) ) {

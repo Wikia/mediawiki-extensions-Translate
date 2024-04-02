@@ -1173,6 +1173,11 @@
 		]
 	},
 	"config": {
+		"PageTranslationAllowedContentModels": {
+			"value": [ "wikitext" ],
+			"description": "List of content model IDs where page translation should be possible. Only text content models are supported.",
+			"public": true
+		},
 		"PageTranslationLanguageList": {
 			"value": "tag-only",
 			"description": "How language list for translatable pages is shown. Allowed values:\n * tag-only: Only display languages with the <languages /> tag.\n * sidebar-only: Display languages as interlanguage links only and ignore the tag even if present on the page.\n * sidebar-fallback: Display languages as interlanguage links if no tag is on the page.\n * sidebar-always: Display languages as interlanguage links and also in tag if it is present on the page.\n @since 2018.07",

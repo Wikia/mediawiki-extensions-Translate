@@ -10,7 +10,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
 use Title;
 use TranslateUtils;
-use WikitextContent;
+use TextContent;
 
 /**
  * Translation aid that provides the message definition.
@@ -60,8 +60,8 @@ class UpdatedDefinitionAid extends TranslationAid {
 			throw new TranslationHelperException( 'Old definition version does not exist anymore' );
 		}
 
-		if ( !$oldContent instanceof WikitextContent || !$newContent instanceof WikitextContent ) {
-			throw new TranslationHelperException( 'Can only work on Wikitext content' );
+		if ( !$oldContent instanceof TextContent || !$newContent instanceof TextContent ) {
+			throw new TranslationHelperException( 'Can only work on text content' );
 		}
 
 		if ( $oldContent->equals( $newContent ) ) {
