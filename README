@@ -1,3 +1,10 @@
+The purpose of this fork is to temporaryly add changes from this PR: https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Translate/+/1014997
+The change is related to this ticket: https://fandom.atlassian.net/browse/UGC-5253
+All the changes are on `temp` branch.
+
+Once the PR is marged, we can archive this repository, and use the official one.
+
+-----
 The Translate extension makes MediaWiki a powerful tool to translate every
 kind of text. It's used especially to translate software user interfaces and
 to manage multilingual wikis in a sensible way.
