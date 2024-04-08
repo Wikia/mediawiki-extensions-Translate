@@ -1,6 +1,6 @@
-The purpose of this fork is to temporaryly add changes from this PR: https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Translate/+/1014997
-The change is related to this ticket: https://fandom.atlassian.net/browse/UGC-5253
-All the changes are on `temp` branch.
+> :warning: The purpose of this fork is to temporaryly add changes from this PR: https://gerrit.wikimedia.org/r/c/mediawiki/extensions/Translate/+/1014997
+> :warning: The change is related to this ticket: https://fandom.atlassian.net/browse/UGC-5253
+> :warning: All the changes are on `temp` branch.
 
 Once the PR is marged, we can archive this repository, and use the official one.
 
